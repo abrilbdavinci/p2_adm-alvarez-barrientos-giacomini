@@ -1,10 +1,10 @@
-# 🎬 Buscador de Películas - Proyecto Universitario
+# 🎬 Aplicaciones para Dispositivos Móviles - Parcial 2
 
 Este proyecto es una aplicación web desarrollada con **Vue 3**, **Vuetify** y **Vue Router**, que permite a los usuarios buscar películas, ver detalles, filtrarlas por género y guardar sus favoritas usando `localStorage`.
 
-Está conectado a la [API de The Movie Database (TMDB)](https://www.themoviedb.org/) y forma parte del **Parcial 2** de la materia **Aplicaciones de Desarrollo Multimedia (ADM)**.
+Está conectado a la [API de The Movie Database (TMDB)](https://www.themoviedb.org/)
 
-> 🧑‍🎓 Desarrollado por: Álvarez - Barrientos - Giacomini  
+> Martina Álvarez - Abril Barrientos - Martina Giacomini  
 > 🎓 DWM3AP - Escuela Da Vinci
 
 ---
