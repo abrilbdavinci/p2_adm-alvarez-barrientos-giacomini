@@ -37,7 +37,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-container-fluid>
+  <v-container>
     <v-row justify="center" align="center" class="my-6">
       <v-col cols="12" md="4">
         <v-img
@@ -75,5 +75,5 @@ onMounted(() => {
         </v-btn>
       </v-col>
     </v-row>
-  </v-container-fluid>
+  </v-container>
 </template>

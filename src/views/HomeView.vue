@@ -1,5 +1,5 @@
 <template>
-  <v-container-fluid>
+  <v-container>
     <div class="buscadores">
       <v-text-field
         v-model="busqueda"
@@ -9,20 +9,20 @@
         clearable
       />
 
-      <v-select
-        class="filtro"
-        v-model="filtroGenero"
-        :items="generos"
-        item-title="name"
-        item-value="id"
-        label="Filtrar por género"
-        @change="buscarPeliculas"
-        clearable
-      >
-        <template v-slot:no-data>
-          <div>No hay géneros disponibles</div>
-        </template>
-      </v-select>
+    <v-select
+      class="filtro"
+      v-model="filtroGenero"
+      :items="generos"
+      item-title="name"
+      item-value="id"
+      label="Filtrar por género"
+      @update:model-value="buscarPeliculas"
+      clearable
+    >
+      <template v-slot:no-data>
+        <div>No hay géneros disponibles</div>
+      </template>
+    </v-select>
     </div>
 
     <v-row>
@@ -40,7 +40,7 @@
         </RouterLink>
       </v-col>
     </v-row>
-  </v-container-fluid>
+  </v-container>
 </template>
 
 <script setup>
@@ -57,9 +57,20 @@ const buscarPeliculas = async () => {
   const query = busqueda.value.trim()
   const genero = Number(filtroGenero.value)
 
-  const url = query
-    ? `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&language=es-ES`
-    : `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES`
+  let url = ''
+  if (!query && genero === 0) {
+    url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+  } else if (!query && genero > 0) {
+    url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genero}`
+  } else {
+    url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`
+  }
+
+  // const url = query 
+  //   ? `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`
+  //   : `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+
+    console.log('URL de búsqueda:', url)
 
   const res = await fetch(url)
   const data = await res.json()
@@ -67,6 +78,8 @@ const buscarPeliculas = async () => {
   peliculas.value = genero
     ? data.results.filter((p) => Array.isArray(p.genre_ids) && p.genre_ids.includes(genero))
     : data.results
+
+    console.log('filtroGenero:', filtroGenero.value, 'genero:', genero)
 }
 
 const obtenerGeneros = async () => {
