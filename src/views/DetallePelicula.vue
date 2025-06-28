@@ -17,6 +17,9 @@ const obtenerPelicula = async () => {
 const agregarAFavoritos = (pelicula) => {
   let favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
 
+ // Verifica si la película ya está en favoritos
+  // Si no está, la agrega; si ya está, muestra un alert
+  // favoritos.some() verifica si al menos un elemento del array cumple con la condición
   if (!favoritos.some((fav) => fav.id === pelicula.id)) {
     favoritos.push({
       id: pelicula.id,

@@ -4,6 +4,8 @@ import { ref, onMounted } from 'vue'
 const favoritos = ref([])
 
 const cargarFavoritos = () => {
+  // Cargar los favoritos desde localStorage, si no hya, crear un array vacío
+  // JSON.parse convierte el string de localStorage a un objeto JavaScript
   favoritos.value = JSON.parse(localStorage.getItem('favoritos')) || []
 }
 
@@ -12,6 +14,7 @@ const eliminarFavorito = (id) => {
   localStorage.setItem('favoritos', JSON.stringify(favoritos.value))
 }
 
+// Cargar los favoritos al montar el componente
 onMounted(() => {
   cargarFavoritos()
 })
